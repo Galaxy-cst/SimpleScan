@@ -1,12 +1,18 @@
-import Pretreatment.toips
-import Fingerprint
-from DBHelper.DB import DBConnect
+from app import *
 
-print(Pretreatment.start('{"type":"ip","content":"192.168.0.1/30"}'))
-# print(Fingerprint.start('12.11.1.4,ip'))
-ilist = ({'ip': '121.121.121.121', 'port': 80}, {'ip': '121.121.121.121', 'port': 443})
-# with DBConnect() as conn:
-#     ip_list = conn.write_ip_port(ilist)
-with DBConnect() as conn:
-    ip_list = conn.read_all_ip_port()
-print(ip_list)
+# from Fingerprint import get_fingerprint
+
+# ip_list = Pretreatment.start('{"type":"ip","content":"120.79.214.167"}')
+# print(ip_list)
+
+# store_servicedetail
+
+# ilist = ({'ip': '121.121.121.121', 'port': 80}, {'ip': '121.121.121.121', 'port': 443})
+
+
+# task_id = '1555663034.6932669'
+# port_list = ['120.79.214.167', 80]
+# get_fingerprint(port_list, task_id)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

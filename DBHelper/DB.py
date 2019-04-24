@@ -14,12 +14,21 @@ class DBConnect:
 
     def read_all_ip_port(self):
         with self.conn.cursor() as c:
-            c.execute('select * from basic_info')
+            c.execute('select * from basic_info where service is null')
             result = c.fetchall()
         return result
 
     def write_ip_port(self, ip_list):
         with self.conn.cursor() as c:
-            c.executemany("""INSERT INTO basic_info(ip,port) VALUES (%(ip)s, %(port)s)""", ip_list)
+            c.executemany("""INSERT INTO basic_info(ip,port,task_id) VALUES (%(ip)s, %(port)s,%(task_id)s)""", ip_list)
             self.conn.commit()
         return True
+
+    def insert_serviceandinfo(self, info_list):
+        with self.conn.cursor() as c:
+            c.execute("""UPDATE basic_info set service = %(service)s, system_info = %(sysinfo)s, details = %(details)s where task_id=%(task_id)s and port=%(port)s""",
+                      info_list)
+            self.conn.commit()
+        return True
+
+

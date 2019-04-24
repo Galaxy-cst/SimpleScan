@@ -1,10 +1,9 @@
+# pretreatment input to ip or ip list
 from IPy import IP
 import dns.resolver
 import json
 
 def toips(data):
-    # data= '{"type":"ip","content":"1.1.1.1"}'
-    # data=input()
     input_data=json.loads(data)
     input_type=input_data['type']
     ip=input_data['content']
