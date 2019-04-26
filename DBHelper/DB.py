@@ -31,4 +31,11 @@ class DBConnect:
             self.conn.commit()
         return True
 
+    def insert_vulns_remarks(self, vuln_list):
+        with self.conn.cursor() as c:
+            c.execute("""UPDATE basic_info set vulns = %(vulns)s, remarks = %(remarks)s where task_id=%(task_id)s and ip_list=%(ip_list)s""",
+                      vuln_list)
+            self.conn.commit()
+        return True
+
 
