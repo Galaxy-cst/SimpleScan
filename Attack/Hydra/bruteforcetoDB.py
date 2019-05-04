@@ -17,4 +17,3 @@ with open(name, 'r') as f:
     # with DBConnect() as conn:
     #     conn.insert_vulns_remarks()
     # return result
-
