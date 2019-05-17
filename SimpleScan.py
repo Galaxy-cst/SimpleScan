@@ -14,7 +14,8 @@ from app import *
 # port_list = ['120.79.214.167', 80]
 # get_fingerprint(port_list, task_id)
 from Attack import make_attack
-make_attack()
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+make_attack('127.0.0.1', 80)
+
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000)
