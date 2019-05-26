@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, request
-from DBHelper.DB import DBConnect
+from lib.DBHelper.DB import DBConnect
 import json
 from concurrent.futures import ThreadPoolExecutor
-from Fingerprint import get_fingerprint
-from Attack.Hydra.bruteforce import bruteforce
+from app.Fingerprint import get_fingerprint
+from app.Attack.Hydra import bruteforce
+from app.System.userModel import login, change_password
 
 executor = ThreadPoolExecutor(10)
 app = Flask(__name__)
@@ -33,4 +34,19 @@ def new_task():
 def scanner():
     ip = '120.79.214.167'
     executor.submit(bruteforce, ip)
+    return 'sucess!'
+
+
+@app.route('/api/user/login', methods=['POST'])
+def router_login():
+    print(request.json)
+    user = request.json['userName']
+    password = request.json['password']
+    return login(password) and (user == 'admin')
+
+
+@app.route('/api/user/changePassword', methods=['POST'])
+def router_change_password():
+    new_password = request.form['newPassword']
+    change_password(new_password)
     return 'sucess!'
